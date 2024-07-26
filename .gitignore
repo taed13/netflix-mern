@@ -1,5 +1,6 @@
 assets-20240725T162617Z-001.zip
 .env
 node_modules
+netflix-client\node_modules
 .idea
 .vscode
