@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "netflix-server/server.js",
   "scripts": {
-    "dev": "nodemon netflix-server/server.js"
+    "dev": "NODE_ENV=development nodemon netflix-server/server.js",
+    "build": "npm install && npm install --prefix netflix-client && npm run build --prefix netflix-client",
+    "start": "NODE_ENV=production node netflix-server/server.js"
   },
   "keywords": [],
   "author": "",
