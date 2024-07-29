@@ -34,6 +34,7 @@ const Navbar = () => {
             >
               Movies
             </Link>
+            |
             <Link
               to={"/"}
               className="hover:underline"
@@ -41,6 +42,7 @@ const Navbar = () => {
             >
               TV Shows
             </Link>
+            |
             <Link to={"/history"} className="hover:underline">
               Search History
             </Link>

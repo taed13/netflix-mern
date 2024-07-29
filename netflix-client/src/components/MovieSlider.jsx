@@ -42,6 +42,7 @@ const MovieSlider = ({ category }) => {
       });
     }
   };
+
   return (
     <div
       className="bg-black text-white relative px-5 md:px-20"
