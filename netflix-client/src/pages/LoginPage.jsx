@@ -2,6 +2,9 @@ import { useState, React } from "react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/authUser";
 
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
+
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,6 +15,15 @@ const LoginPage = () => {
     e.preventDefault();
     login({ email, password });
   };
+
+  const googleAuth = () => {
+    window.open("http://localhost:5001/api/v1/auth/google", "_self");
+  };
+
+  const githubAuth = () => {
+    window.open("http://localhost:5001/api/v1/auth/github", "_self");
+  };
+
   return (
     <>
       <div className="h-screen w-full hero-bg">
@@ -67,6 +79,20 @@ const LoginPage = () => {
                 {isLoggingIn ? "Logging in..." : "Login"}
               </button>
             </form>
+            <div className="flex flex-row items-center gap-4 mt-8 justify-center">
+              <div
+                className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
+                onClick={googleAuth}
+              >
+                <FcGoogle size={30} />
+              </div>
+              <div
+                className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
+                onClick={githubAuth}
+              >
+                <FaGithub size={30} />
+              </div>
+            </div>
             <div className="text-center text-gray-400">
               Don't have an account?{" "}
               <Link to={"/signup"} className="text-red-500 hover:underline">

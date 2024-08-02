@@ -51,4 +51,16 @@ export const useAuthStore = create((set) => ({
       set({ isCheckingAuth: false, user: null });
     }
   },
+  updateProfile: async (credentials) => {
+    try {
+      const response = await axios.put(
+        "/api/v1/auth/updateProfile",
+        credentials
+      );
+      set({ user: response.data.user });
+      toast.success("Profile updated successfully");
+    } catch (error) {
+      toast.error(error.response.data.message || "Profile update failed");
+    }
+  },
 }));

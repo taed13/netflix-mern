@@ -8,12 +8,10 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
     unique: true,
   },
   password: {
     type: String,
-    required: true,
   },
   image: {
     type: String,
@@ -22,6 +20,18 @@ const userSchema = new mongoose.Schema({
   searchHistory: {
     type: Array,
     default: [],
+  },
+  googleId: {
+    type: String,
+    default: "",
+  },
+  githubId: {
+    type: String,
+    default: "",
+  },
+  provider: {
+    type: String,
+    default: "",
   },
 });
 

@@ -100,7 +100,7 @@ export async function login(req, res, next) {
   }
 }
 
-export async function logout(req, res, next) {
+export function logout(req, res, next) {
   try {
     res.clearCookie("jwt-netflix");
 
@@ -114,7 +114,7 @@ export async function logout(req, res, next) {
   }
 }
 
-export async function authCheck(req, res, next) {
+export function authCheck(req, res, next) {
   try {
     res.status(200).json({
       success: true,
@@ -122,6 +122,33 @@ export async function authCheck(req, res, next) {
     });
   } catch (error) {
     console.log("Error in authCheck controller: ", error.message);
-    res.status(500).json({ succes: false, message: "Internal server error" });
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+}
+
+export function updateProfile(req, res) {
+  const { username, image } = req.body;
+  const user = req.user;
+  try {
+    if (username) {
+      user.username = username;
+    }
+
+    if (image) {
+      user.image = image;
+    }
+
+    user.save();
+
+    res.status(200).json({
+      success: true,
+      user: {
+        ...user._doc,
+        password: "",
+      },
+    });
+  } catch (error) {
+    console.log("Error in updateProfile controller: ", error.message);
+    res.status(500).json({ success: false, message: "Internal server error" });
   }
 }

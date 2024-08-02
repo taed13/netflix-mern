@@ -1,6 +1,10 @@
 import express from "express";
 import morgan from "morgan";
 import path from "path";
+import cors from "cors";
+import passport from "passport";
+import cookieSession from "cookie-session";
+import session from "express-session";
 
 import authRoutes from "./routes/auth.route.js";
 import movieRoutes from "./routes/movie.route.js";
@@ -15,10 +19,24 @@ const app = express();
 
 const __dirname = path.resolve();
 
+app.use(
+  session({
+    secret: ENV_VARS.JWT_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      secure: false,
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
+app.use(cors());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/movie", protectRoute, movieRoutes);
